@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Smart_Parking | Parking Search
+{% endblock title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nearby Parking Slots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+      background-image: url("{% static 'images/img_1.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      position: static;
+        }
+        .contain
+        er {
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px 5px 20px 0;
+        }
+        .btn:hover {
+            background-color: #1a5edb;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .slot {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .slot h3 {
+            margin-top: 0;
+        }
+        .distance {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <br><br>
+
+    <div class="container" style="max-width: 900px;
+    margin: 60px auto;
+    background: rgb(246, 244, 244);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">  
+        <h2 style="text-align: center;";>Find Parking</h2>
+        <form method="get" id="location-form">
+            <section class="container my-5 text-center">
+            <input type="text" id="location-input" placeholder="Enter a place or address" required style="text-align: center;"><br>
+            <input type="hidden" name="latitude" id="lat">
+            <input type="hidden" name="longitude" id="lon"><br>
+            <div class="center-align">
+            <button type="submit" onclick="geocodeLocation(event)" style="padding: 14px 20px; font-size: 20px;"><b>Search</b></button>
+            <button type="button" onclick="useMyLocation()" style="padding: 14px 20px; font-size: 20px;">📍 Use My Current Location</button>
+        </div>
+        </section>
+    </div>
+    
+
+  </br></br>
+     
+      {% if nearby_slots %}
+<div style="text-align: center;">
+    <h3 style="color: white;">Nearby Parking Slots (within 5km)</h3>
+</div>
+  
+    <div class="row">
+      {% for slot in nearby_slots %}
+        <div class="col s12 m4">
+          <div class="card z-depth-1 small-card">
+            <div class="card-content">
+              <span class="card-title">🅿️ {{ slot.name }}</span>
+              <p>{{ slot.address|truncatechars:50 }}</p>
+                <p class="distance">Distance: {{ slot.distance|floatformat:2 }} km</p>
+                <p>4-Wheeler: ₹{{ slot.four_wheeler_price }} | Available: {{ slot.four_wheeler_available_slots }}</p>
+                    <p>2-Wheeler: ₹{{ slot.two_wheeler_price }} | Available: {{ slot.two_wheeler_available_slots }}</p>
+            </div>
+            <div class="card-action">
+                <a href="https://www.google.com/maps/dir/?api=1&destination={{ slot.latitude }},{{ slot.longitude }}" target="_blank">
+                    Get Directions
+                </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+      {% else %}
+<div class="center-align" style="color: white;">
+<h3><b>OOPS!.... </b></h3>
+<h6>No nearby parking slots found within 5km.</h6>
+<h6>Try searching for a different location.</h6>
+</div>
+{% endif %}
+
+<script>
+    function useMyLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const params = new URLSearchParams(window.location.search);
+                params.set("latitude", lat);
+                params.set("longitude", lng);
+                window.location.search = params.toString();
+            }, function() {
+                alert("Unable to access your location. Please allow location access.");
+            });
+        } else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+
+  function geocodeLocation(event) {
+      event.preventDefault();
+      const location = document.getElementById("location-input").value;
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
+
+      fetch(url)
+          .then(response => response.json())
+          .then(data => {
+              if (data && data.length > 0) {
+                  const lat = data[0].lat;
+                  const lon = data[0].lon;
+                  document.getElementById("lat").value = lat;
+                  document.getElementById("lon").value = lon;
+                  document.getElementById("location-form").submit();
+              } else {
+                  alert("Location not found. Please try a different address.");
+              }
+          })
+          .catch(error => {
+              alert("Error fetching location.");
+              console.error(error);
+          });
+  }
+  </script>
+
+
+
+<br><br>
+
+</body>
+</html>
+{% endblock content %}

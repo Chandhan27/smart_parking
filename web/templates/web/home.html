@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Smart_Parking | Home
+{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home
+
+    </title>
+</head>
+<br><br>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url("{% static 'images/img_1.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      /* color: white; */
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 50px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 100px auto;
+      text-align: center;
+    }
+    .card {
+      margin: 1rem;
+      min-width: 250px;
+    }
+    body > main {
+  flex: 1 0 auto;
+}
+  
+    
+</style>
+<body>
+
+    <div class="container" style="max-width: 900px;
+    margin: 60px auto;
+    background: rgb(246, 244, 244);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;">  
+        <h3>Welcome to the Smart Parking System</h3>
+    <h6>Find your parking spot easily and quickly!</h6>
+        <h6>Search for Nearby Parking Slots</h6> <br>
+        <a href="{% url 'find_parking' %}" class="btn" style="background-color: rgb(255, 255, 255); color: black;"><b>Services</b></a>
+    </div>
+   
+    <div class="row">
+        <div class="col s12 m4">
+          <div class="card" style="background-color: rgb(239, 243, 249);">
+            <div class="card-content">
+              <span class="card-title">Save Money</span>
+              <p>Save upto 20% using our site compared to other parking platform.</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col s12 m4">
+          <div class="card" style="background-color: rgb(239, 243, 249);">
+            <div class="card-content">
+              <span class="card-title">Save Time</span>
+              <p>It's quick and easy to spot the parking spot and reach out there.</p>
+            </div>
+
+          </div>
+        </div>
+  
+        <div class="col s12 m4">
+          <div class="card" style="background-color: rgb(239, 243, 249);">
+            <div class="card-content">
+              <span class="card-title">Save Stress</span>
+              <p>No stress in finding the parking spot in emergency, as our site reaches u quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Smart Parking System
+    <h1>Welcome to the Smart Parking System</h1>
+    <p>Find your parking spot easily and quickly!</p>
+    <p>Use our app to locate available parking spaces in real-time.</p>
+    <p>Contact us for more information or support.</p>
+    <p>Follow us on social media for updates and promotions.</p>
+    <p>Thank you for choosing our Smart Parking System!</p>
+    <p>For more information, visit our website or contact us.</p> -->
+   
+        
+
+    
+
+</body>
+</html>
+
+{% endblock content %}

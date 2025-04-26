@@ -1,0 +1,27 @@
+<!-- <nav>
+  <div class="nav-wrapper" style="height: 80px; line-height: 80px; background-color:#aa1628; color: #fff;">
+    <a href="#" class="brand-logo left" style="font-size: 2rem;">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="sass.html">Sass</a></li>
+      <li><a href="badges.html">Components</a></li>
+      <li><a href="collapsible.html">JavaScript</a></li>
+    </ul>
+  </div>
+</nav> -->
+{% load static %}
+
+<nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+    <div class="nav-wrapper" style="height: 80px; line-height: 80px; background-color: #aa1628; color: #fff;">
+       
+      <a href="{% url 'web:home' %}" class="brand-logo " style="font-size: 2rem; padding-left: 20px;">Urban ParkSpot</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down" style="padding-right: 20px;">
+        <li><a href="{% url 'web:about' %}" style="color: #fff;">About us</a></li>
+        <li><a href="{% url 'find_parking' %}" style="color: #fff;">Services</a></li>
+        <li><a href="{% url 'web:help' %}" style="color: #fff;">Help center</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Make space so content doesn't get hidden behind navbar -->
+  <div style="height: 80px;"></div>
+  

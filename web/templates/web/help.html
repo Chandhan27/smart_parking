@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Smart_Parking | Home
+{% endblock title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Center</title>
+</head>
+<style>
+   
+    .content {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 50px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 100px auto;
+      text-align: center;
+    }
+      body > main {
+  flex: 1 0 auto;
+}
+    
+</style>
+<body>
+    <div class="container" style="max-width: 900px;
+    margin: 60px auto;
+    background: rgb(234, 233, 233);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center;"> 
+    <h1>HELP CENTER</h1>
+    <iframe src="https://forms.gle/5ViNZGHZ5pzN4UPB6" width="640" height="800" frameborder="0" marginheight="0" marginwidth="0">
+  Loading…
+</iframe>
+
+    </div>
+    <br><br>
+</body>
+</html>
+
+{% endblock content %}
